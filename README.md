@@ -5,7 +5,7 @@
 * Create DockerID at [Docker hub](https://hub.docker.com)
 
 ## Course outline
-* How to use Docker-machine
+* [How to use Docker-machine](https://github.com/MasterTos/docker_workshop#how-to-use-docker-machine)
 * Pull and Push Docker images
 * Run container
 * Volume
