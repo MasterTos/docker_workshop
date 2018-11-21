@@ -53,17 +53,17 @@ docker logout
 ```
 
 ## Run Container
-### 1. Interactive Mode
-#### 1.1 run docker on interactive mode with command
+### Interactive Mode
+1. run docker on interactive mode with command
 ```bash
 docker run -it --rm --name python -p 8000:8000 \
   mastertos/<image>:<tag> python manage.py runserver
 ```
-#### 1.2 open brower with url: `http://<ip address>:8000/`
-#### 1.3 Terminate container: `docker stop python`
-#### 1.4 with option `--rm` with remove all container after finished work.
+2. open brower with url: `http://<ip address>:8000/`
+3. Terminate container: `docker stop python`
+4. with option `--rm` with remove all container after finished work.
 
-### 2. Detach Mode
+### Detach Mode
 ```bash
 docker run -i -d --name python -p 8000:8000 \
   mastertos/<image>:<tag> python manage.py runserver
