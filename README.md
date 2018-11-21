@@ -6,12 +6,12 @@
 
 ## Course outline
 * [How to use Docker-machine](https://github.com/MasterTos/docker_workshop#how-to-use-docker-machine)
-* [Pull and Push Docker images](https://github.com/MasterTos/docker_workshop#run-container)
-* Run container
-* Volume
-* Inspect and Log
-* Dockerfile
-* Docker-compose
+* [Pull and Push Docker images](https://github.com/MasterTos/docker_workshop#pull-and-push-docker-images)
+* [Run container](https://github.com/MasterTos/docker_workshop#run-container)
+* [Volume](https://github.com/MasterTos/docker_workshop#volume)
+* [Inspect and Log](https://github.com/MasterTos/docker_workshop#inspect-and-log)
+* [Dockerfile](https://github.com/MasterTos/docker_workshop#dockerfile)
+* [Docker Compose](https://github.com/MasterTos/docker_workshop#docker-compose)
 
 ## How to use Docker Machine
 
@@ -21,7 +21,7 @@ docker-machine --version #check version of docker-machine
 
 docker-machine create --driver virtualbox -virtualbox-memory "1024" docker101 # create new docker-machine
 
-docker-machine ls # check ip address
+docker-machine ls # checkhttps://github.com/MasterTos/docker_workshop# ip address
 
 #default username/password is docker/tcuser
 ```
