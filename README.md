@@ -6,7 +6,7 @@
 
 ## Course outline
 * [How to use Docker-machine](https://github.com/MasterTos/docker_workshop#how-to-use-docker-machine)
-* Pull and Push Docker images
+* [Pull and Push Docker images](https://github.com/MasterTos/docker_workshop#run-container)
 * Run container
 * Volume
 * Inspect and Log
@@ -54,17 +54,27 @@ docker logout
 
 ## Run Container
 ### Interactive Mode
-1. run docker on interactive mode with command
+1. Run docker on interactive mode with command
 ```bash
 docker run -it --rm --name python -p 8000:8000 \
   mastertos/<image>:<tag> python manage.py runserver
 ```
-2. open brower with url: `http://<ip address>:8000/`
+2. Open browser with url: `http://<ip address>:8000/` <br>
+*You can check ip address with command: `docker-machine ls`*
 3. Terminate container: `docker stop python`
-4. with option `--rm` with remove all container after finished work.
+4. With option `--rm` with remove all container after finished work.
 
 ### Detach Mode
+1. Run docker on detach with command
 ```bash
 docker run -i -d --name python -p 8000:8000 \
   mastertos/<image>:<tag> python manage.py runserver
+```
+2. Open browser with url: `http://<ip address>:8000/`
+3. Stop container: `docker stop python`
+4. Remove container: `docker rm python`
+   
+### Exec Mode
+```bash
+docker exec -it python bash
 ```
