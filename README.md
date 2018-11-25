@@ -6,12 +6,12 @@
 
 ## Course outline
 * [How to use Docker-machine](#how-to-use-docker-machine)
-* [Pull and Push Docker images](https://github.com/MasterTos/docker_workshop#pull-and-push-docker-images)
-* [Run container](https://github.com/MasterTos/docker_workshop#run-container)
-* [Volume](https://github.com/MasterTos/docker_workshop#volume)
-* [Inspect and Log](https://github.com/MasterTos/docker_workshop#inspect-and-log)
-* [Dockerfile](https://github.com/MasterTos/docker_workshop#dockerfile)
-* [Docker Compose](https://github.com/MasterTos/docker_workshop#docker-compose)
+* [Pull and Push Docker images](#pull-and-push-docker-images)
+* [Run container](#run-container)
+* [Volume](#volume)
+* [Inspect and Log](#inspect-and-log)
+* [Dockerfile](#dockerfile)
+* [Docker Compose](#docker-compose)
 
 ## How to use Docker Machine
 
