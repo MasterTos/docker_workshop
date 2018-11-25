@@ -19,6 +19,7 @@ Docker and Compose 101 workshop - Introductions to Docker and Compose.
     - [Interactive container](#interactive-container)
     - [Detach container](#detach-container)
     - [Attach container](#attach-container)
+    - [Inspect and Log a running container](#inspect-and-log-a-running-container)
     - [Start stop and remove container](#start-stop-and-remove-container)
   - [Dockerfile](#dockerfile)
   - [Docker Compose](#docker-compose)
@@ -89,9 +90,47 @@ $ docker container run -p 5000:5000 python:alpine python -m http.server 5000
 
 ## Basic container operations
 ### Interactive container
+```bash
+$ docker container run -it busybox
+# Output:
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 sh
+   10 root      0:00 ps
+```
 ### Detach container
+```bash
+$ docker container run -d -p 5000:5000 --name web python:alpine python -m http.server 5000
+```
 ### Attach container
+```bash
+$ docker container exec -it web sh
+```
+### Inspect and Log a running container
+We can use `ps` command to view all running containers:
+```bash
+$ docker container ps
+# Output:
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                            NAMES
+0d5f55ef5e85        python:alpine           "python -m http.serv…"   5 minutes ago       Up 5 minutes        0.0.0.0:5000->5000/tcp           webtest
+```
+
+We can check configuration of container with command:
+```bash
+$ docker container inspect webtest
+```
+
+We can check log of container with command:
+```bash
+$ docker container logs webtest
+```
+
 ### Start stop and remove container
+```bash
+$ docker container start webtest
+$ docker container stop webtest
+$ docker container rm webtest
+```
 
 ## Dockerfile
 
