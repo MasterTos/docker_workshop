@@ -32,7 +32,7 @@ $ docker-machine --version #check version of docker-machine
 
 $ docker-machine create --driver virtualbox -virtualbox-memory "1024" default # create new docker-machine
 
-$ docker-machine ls # checkhttps://github.com/MasterTos/docker_workshop# ip address
+$ docker-machine ls # check ip address
 ```
 *NOTE:* username/password is docker/tcuser
 
@@ -75,6 +75,7 @@ $ docker container run busybox ls -l /home
 # Output:
 total 0
 ```
+We can use `-v` flag to mount directory to container:
 ```bash
 $ docker container run -v $(pwd):/home busybox ls -l /home
 # Output:
@@ -83,10 +84,22 @@ total 4
 ```
 
 ### Publish container port
+We can use `-p` flag to forward a port on the host to the port 5000 inside the container:
 ```bash
 $ docker container run -p 5000:5000 python:alpine python -m http.server 5000
 ```
 *NOTE:* `-p <HostPort>:<ContainerPort>`
+
+This command blocks because the server listens for requests, open a new tab and access the endpoint
+```bash
+$ curl <ip address>:5000
+# Output:
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+....
+```
+Press `Ctrl-C` to stop the running container.
 
 ## Basic container operations
 ### Interactive container
@@ -98,6 +111,8 @@ PID   USER     TIME  COMMAND
     1 root      0:00 sh
    10 root      0:00 ps
 ```
+Press `Ctrl-C` to stop the running container.
+
 ### Detach container
 ```bash
 $ docker container run -d -p 5000:5000 --name web python:alpine python -m http.server 5000
@@ -106,6 +121,16 @@ $ docker container run -d -p 5000:5000 --name web python:alpine python -m http.s
 ```bash
 $ docker container exec -it web sh
 ```
+We can look around to see the process running as PID 1:
+```bash
+/ # ps
+PID   USER     TIME  COMMAND
+    1 root      0:00 sh
+   10 root      0:00 ps
+# exit
+```
+- `-t` flag attaches terminal for interactive typing.
+- `-i` flag attaches input/output from the terminal to the process.
 ### Inspect and Log a running container
 We can use `ps` command to view all running containers:
 ```bash
