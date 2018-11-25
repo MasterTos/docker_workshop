@@ -1,15 +1,22 @@
-# Docker 101
+# Docker and Compose 101
+Docker and Compose 101 workshop - Introductions to Docker and Compose.
 
 ## Prerequisites
 * Install [Docker toolbox](https://docs.docker.com/toolbox/overview/#whats-in-the-box) for Windows/Mac
-* Create DockerID at [Docker hub](https://hub.docker.com)
+* For Linux follow instructions [here](https://docs.docker.com/install/).
 
 ## Course outline
 * [How to use Docker-machine](#how-to-use-docker-machine)
-* [Pull and Push Docker images](#pull-and-push-docker-images)
-* [Run container](#run-container)
-* [Volume](#volume)
-* [Inspect and Log](#inspect-and-log)
+* [Introduction](#introduction)
+  * [Hello, world](#hello-world)
+  * [Envrionment variables](#envrionment-variables)
+  * [Host mounts volume](#host-mounts-volume)
+  * [Publish container port](#publish-container-port)
+* [Basic container operations](#basic-container-operations)
+  * [Interactive container](#interactive-container)
+  * [Detach container](#detach-container)
+  * [Attach container](#attach-container)
+  * [Start stop and remove container](#start-stop-and-remove-container)
 * [Dockerfile](#dockerfile)
 * [Docker Compose](#docker-compose)
 
@@ -96,9 +103,9 @@ docker container run -dt --name web1 \
 mastertos/<image> sh
 ```
 3. Create file within web1
-   ```bash
-   docker container exec -it web1 touch /data/testfile
-   ```
+```bash
+docker container exec -it web1 touch /data/testfile
+```
 4. Create container (web2) by attach volume with command:
 ```bash
 docker container run -dt --name web2 \
@@ -107,16 +114,16 @@ mastertos/<image> sh
 ```
 
 5. List file in web2
-   ```bash
-   docker container exec -it web2 ls /data
-   ```
+```bash
+docker container exec -it web2 ls /data
+```
 
 6. Cleanup
-  ```bash
-  docker container stop web1 web2
-  docker container rm web1 web2
-  docker volume rm myvolune
-  ```
+```bash
+docker container stop web1 web2
+docker container rm web1 web2
+docker volume rm myvolune
+```
 
 ## Inspect and Log
 For this workshop. We will demonstration how to check log / configuration of container running
@@ -139,10 +146,10 @@ docker container logs nginx |more
 ```
 
 4. Cleanup lab:
-  ```bash
-	docker container stop nginx
-	docker container rm nginx	
-  ```
+```bash
+docker container stop nginx
+docker container rm nginx	
+```
 
 ## Dockerfile
 
