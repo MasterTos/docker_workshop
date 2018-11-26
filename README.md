@@ -46,7 +46,7 @@ $ docker-machine ls # check ip address
 *NOTE:* username/password is docker/tcuser
 
 SSH to docker-machine
-- `docker-machine ssh docker101` # default ssh via command prompt
+- `docker-machine ssh default` # default ssh via command prompt
 - access via putty(windows) to ip address
 - access via Shell (mac)
 
@@ -119,8 +119,8 @@ $ docker container run -it busybox
 PID   USER     TIME  COMMAND
     1 root      0:00 sh
    10 root      0:00 ps
+/ # exit
 ```
-Press `Ctrl-C` to stop the running container.
 
 ### Detach container
 ```bash
@@ -136,7 +136,7 @@ We can look around to see the process running as PID 1:
 PID   USER     TIME  COMMAND
     1 root      0:00 sh
    10 root      0:00 ps
-# exit
+/ # exit
 ```
 - `-t` flag attaches terminal for interactive typing.
 - `-i` flag attaches input/output from the terminal to the process.
@@ -206,18 +206,53 @@ LABEL ...
 ```yaml
 RUN <command>
 ```
+
 - `CMD` : The main purpose of a `CMD` is to provide defaults for an executing container.
 ```yaml
 CMD [“executable”, “param1”, “param2”…]
 ```
-- `EXPOSE`
-- `ENV`
-- `ADD` or `COPY`
-- `ENTRYPOINT`
-- `VOLUME`
-- `WORKDIR`
+
+- `EXPOSE` : The `EXPOSE` instruction informs Docker that the container listens on the specified network ports at runtime.
+```yaml
+EXPOSE <port> [<port>/<protocol>...]
+```
+
+- `ENV` : The `ENV` instruction sets the environment variable `<key>` to the value `<value>`.
+```yaml
+ENV <key> <value>
+ENV <key>=<value> ...
+``` 
+  
+- `ADD` or `COPY` : The `ADD` instruction copies new files, directories or remote file URLs from `<src>` and adds them to the filesystem of the image at the path `<dest>`.
+```yaml
+ADD [--chown=<user>:<group>] <src>... <dest>
+```
+*NOTE:* `COPY` is same as `ADD`, but without the tar and remote URL handling.
+
+- `ENTRYPOINT` : An `ENTRYPOINT` allows you to configure a container that will run as an executable.
+```yaml
+ENTRYPOINT ["executable", "param1", "param2"]
+```
+
+
+- `VOLUME` : The `VOLUME` instruction creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers. 
+```yaml
+VOLUME ["/data"]
+```
+
+- `WORKDIR` : The `WORKDIR` instruction sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY` and `ADD` instructions that follow it in the Dockerfile.
+```yaml
+WORKDIR /path/to/workdir
+```
+
 - etc.
 ### Examples
+```yaml
+FROM alpine:latest
+LABEL maintainer="Wisit Tipcheun <MasterTos@yahoo.com>"
+RUN apk add curl
+ENTRYPOINT curl
+```
 
 ## Docker Compose
 ### Usage
