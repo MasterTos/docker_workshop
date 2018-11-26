@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  django-web:
+    image: 'django-web'
+    container_name: 'django-web'
+    build:
+      context: ../django
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ../django/example:/code

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  django-web2:
+    image: django-web2
+    container_name: django-web2
+    build:
+      context: ../django
+      dockerfile: Dockerfile
+    # ports:
+    #   - 8000:8000
+    # volumes:
+    #   - ../django/example:/code
+
+  django-nginx:
+    image: nginx:alpine
+    container_name: django-nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web.conf:/etc/nginx/conf.d/web.conf
+    depends_on:
+      - django-web2
