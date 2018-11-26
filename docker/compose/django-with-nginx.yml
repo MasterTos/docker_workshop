@@ -1,9 +1,9 @@
 version: '3'
 
-services:
-  django-web2:
-    image: django-web2
-    container_name: django-web2
+services: # these are all the services that a docker app uses
+  django-web2: # this is the name of the service we're creating; it's chosen by us. Here, we're calling it "django-web2".
+    image: django-web2 # this is the name of the image to us
+    container_name: django-web2 # this is the name of the container to us
     build:
       context: ../django
       dockerfile: Dockerfile
@@ -20,4 +20,4 @@ services:
     volumes:
       - ./web.conf:/etc/nginx/conf.d/web.conf
     depends_on:
-      - django-web2
+      - django-web2 # this makes sure that the postgres service below has been started prior to attempting to start this service.

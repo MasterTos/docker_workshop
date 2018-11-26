@@ -30,7 +30,6 @@ Docker and Compose 101 workshop - Introductions to Docker and Compose.
     - [Examples](#examples)
   - [Docker Compose](#docker-compose)
     - [Usage](#usage-1)
-    - [Docker Compose instructions](#docker-compose-instructions)
     - [Examples](#examples-1)
 
 ## How to use Docker Machine
@@ -256,20 +255,99 @@ WORKDIR /path/to/workdir
 
 - etc.
 ### Examples
+- Entrypoint
 ```yaml
-FROM alpine:latest
-LABEL maintainer="Wisit Tipcheun <MasterTos@yahoo.com>"
-RUN apk add curl
-ENTRYPOINT curl
+# docker/entrypoint/Dockerfile
+FROM busybox
+ADD hello.sh /hello.sh
+ENTRYPOINT ["/hello.sh"]
 ```
+```bash
+# docker/entrypoint/hello.sh
+
+#!/bin/sh
+
+echo "hello, world $@!"
+```
+```bash
+$ cd docker/entrypoint
+$ docker image build -t hello .
+$ docker container run hello
+$ docker container run hello EI-workshop
+```
+- Django
 ```yaml
-FROM python:3-alpine
-LABEL maintainer="Wisit Tipcheun <MasterTos@yahoo.com>"
-EXPOSE 5000
-ENTRYPOINT ["python", "-m", "http.server", "5000"]
+# docker/django/Dockerfile
+FROM mastertos/django:base
+WORKDIR /code
+ADD example /code
+EXPOSE 8000
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+```bash
+$ cd docker/django
+$ docker image build -t django:example .
+$ docker container run --rm django:example
 ```
 
 ## Docker Compose
 ### Usage
-### Docker Compose instructions
+```bash
+docker-compose up
+docker-compose down
+docker-compose exec <name> <cmd>
+docker-compose -f /path/to/docker-compose/file [up,down,...]
+```
 ### Examples
+- Single Container
+```yaml
+# docker/compose/docker-compose.yml
+version: '3'
+
+services: # these are all the services that a docker app uses
+  django-web: # this is the name of the service we're creating; it's chosen by us. Here, we're calling it "django-web".
+    image: django-web # this is the name of the image to us
+    container_name: django-web # this is the name of the container to us
+    build:
+      context: ../django
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ../django/example:/code
+```
+```bash
+$ cd docker/compose
+$ docker-compose up
+```
+- Multiple Containers
+```yaml
+version: '3'
+
+services: # these are all the services that a docker app uses
+  django-web2: # this is the name of the service we're creating; it's chosen by us. Here, we're calling it "django-web2".
+    image: django-web2 # this is the name of the image to us
+    container_name: django-web2 # this is the name of the container to us
+    build:
+      context: ../django
+      dockerfile: Dockerfile
+    # ports:
+    #   - 8000:8000
+    # volumes:
+    #   - ../django/example:/code
+
+  django-nginx:
+    image: nginx:alpine
+    container_name: django-nginx
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web.conf:/etc/nginx/conf.d/web.conf
+    depends_on:
+      - django-web2 # this makes sure that the postgres service below has been started prior to attempting to start this service.
+```
+```bash
+$ cd docker/compose
+$ docker-compose -f django-with-nginx.yml up -d
+$ docker-compose -f django-with-nginx.yml down
+```

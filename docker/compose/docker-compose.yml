@@ -1,9 +1,9 @@
 version: '3'
 
-services:
-  django-web:
-    image: 'django-web'
-    container_name: 'django-web'
+services: # these are all the services that a docker app uses
+  django-web: # this is the name of the service we're creating; it's chosen by us. Here, we're calling it "django-web".
+    image: django-web # this is the name of the image to us
+    container_name: django-web # this is the name of the container to us
     build:
       context: ../django
       dockerfile: Dockerfile
