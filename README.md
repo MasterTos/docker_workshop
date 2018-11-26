@@ -22,7 +22,13 @@ Docker and Compose 101 workshop - Introductions to Docker and Compose.
     - [Inspect and Log a running container](#inspect-and-log-a-running-container)
     - [Start stop and remove container](#start-stop-and-remove-container)
   - [Dockerfile](#dockerfile)
+    - [Usage](#usage)
+    - [Dockerfile instructions](#dockerfile-instructions)
+    - [Examples](#examples)
   - [Docker Compose](#docker-compose)
+    - [Usage](#usage-1)
+    - [Docker Compose instructions](#docker-compose-instructions)
+    - [Examples](#examples-1)
 
 ## How to use Docker Machine
 
@@ -158,5 +164,13 @@ $ docker container rm webtest
 ```
 
 ## Dockerfile
+Docker can build images automatically by reading the instructions from a `Dockerfile`. A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession.
+
+### Usage
+### Dockerfile instructions
+### Examples
 
 ## Docker Compose
+### Usage
+### Docker Compose instructions
+### Examples
