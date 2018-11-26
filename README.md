@@ -23,6 +23,9 @@ Docker and Compose 101 workshop - Introductions to Docker and Compose.
     - [Start stop and remove container](#start-stop-and-remove-container)
   - [Dockerfile](#dockerfile)
     - [Usage](#usage)
+      - [Building](#building)
+      - [Verisoning](#verisoning)
+      - [.dockerignore file](#dockerignore-file)
     - [Dockerfile instructions](#dockerfile-instructions)
     - [Examples](#examples)
   - [Docker Compose](#docker-compose)
@@ -167,7 +170,53 @@ $ docker container rm webtest
 Docker can build images automatically by reading the instructions from a `Dockerfile`. A `Dockerfile` is a text document that contains all the commands a user could call on the command line to assemble an image. Using `docker build` users can create an automated build that executes several command-line instructions in succession.
 
 ### Usage
+#### Building
+```bash
+$ docker image build .
+```
+```bash
+$ docker image build -f path/to/Dockerfile .
+```
+```bash
+$ docker image build -t <user>/<appname> .
+```
+*NOTE:* Default tag is `:latest`
+#### Verisoning
+```bash
+$ docker image build -t <user>/<appname>:<tag> .
+```
+```bash
+$ docker image build -t <user>/<appname>:<tag> -t <user>/<appname>:latest .
+```
+
+#### .dockerignore file
 ### Dockerfile instructions
+- `FROM` : The `FROM` instruction initializes a new build stage and sets the Base Image for subsequent instructions.
+```yaml
+FROM <image>[:<tag>] [AS <name>]
+```
+- `LABEL` : The `LABEL` instruction adds metadata to an image.
+```yaml
+LABEL <key>=<value>
+LABEL <key>=<value>
+LABEL ...
+```
+
+- `RUN` : The `RUN` instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting committed image will be used for the next step in the `Dockerfile`.
+```yaml
+RUN <command>
+```
+- `CMD` : The main purpose of a `CMD` is to provide defaults for an executing container.
+```yaml
+CMD [“executable”, “param1”, “param2”…]
+```
+- `EXPOSE`
+- `ENV`
+- `ADD` or `COPY`
+- `ENTRYPOINT`
+- `VOLUME`
+- `WORKDIR`
+- etc.
 ### Examples
 
 ## Docker Compose
